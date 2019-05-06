@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .addbook {
+    border: 5px solid rgb(231, 222, 222);
+    background-color:rgb(203, 221, 175);
+    position: fixed;
+    right:0;
+  }
+
+ 
+  .col-10 {
+      width: 83.33%;
+      height:100%;
+  }
+
+  .image1{   
+      background-image: url('../images/AddBook.jpg');
+      background-repeat: no-repeat;
+      
+      height: 50px; /* Height of new image */
+      
+      
+  }

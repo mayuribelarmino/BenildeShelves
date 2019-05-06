@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .header {
+    border: 5px solid rgb(231, 222, 222);
+  
+    background-image: url('../images/Header.jpg');
+    background-repeat: no-repeat;
+    height: 100px; /* Height of new image */
+  }

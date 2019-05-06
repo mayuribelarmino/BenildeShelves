@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .main {
+    border: 5px solid rgb(231, 222, 222);
+    background-color: black;
+    position: fixed;
+    right:0;
+  }
+
+ 
+  .col-10 {
+      width: 83.33%;
+      height:100%;}

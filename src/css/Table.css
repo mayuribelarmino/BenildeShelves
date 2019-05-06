@@ -1,0 +1,58 @@
+.table1 {
+    position: absolute;
+    left: 5.5%;
+    top:30%;
+    border-radius:10;
+    border: 5px solid rgb(90, 187, 114);
+    border-collapse: collapse;
+    width:90%;
+    table-layout: fixed;
+  }
+   th {
+    background: #ccc;
+    font-size:15px;
+    
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    text-align:center;
+    padding-left:10px;
+    padding-right:10px;
+    font-size:14px;
+  }
+  
+  tr:nth-child(even) {
+    background: #efefef;
+  }
+  
+  tr:hover {
+    background: #d1d1d1;
+  }
+  .isbn{
+    position: absolute;
+    right: 4%;
+    top:15%;
+  
+  }
+  
+  .subject{
+    position: absolute;
+    right: 27%;
+    top:15%;
+  
+  }
+
+  .author{
+    position: absolute;
+    right: 51%;
+    top:15%;
+  
+  }
+
+  .title{
+    position: absolute;
+    right: 75%;
+    top:15%;
+  
+  }

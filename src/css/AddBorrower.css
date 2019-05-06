@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .addborrower {
+    border: 5px solid rgb(231, 222, 222);
+    background-color:rgb(203, 221, 175);
+    position: fixed;
+    right:0;
+  }
+
+ 
+  .col-10 {
+      width: 83.33%;
+      height:100%;}
+
+      .image2{   
+        background-image: url('../images/AddBorrower.jpg');
+        background-repeat: no-repeat;
+        
+        height: 50px; /* Height of new image */
+        
+        
+    }

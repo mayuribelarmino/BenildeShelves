@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .listofborrowedbooks {
+    border: 5px solid rgb(231, 222, 222);
+    background-color:rgb(203, 221, 175);
+    position: fixed;
+    right:0;
+  }
+
+ 
+  .col-10 {
+      width: 83.33%;
+      height:100%;
+  }
+
+  .image4{   
+    background-image: url('../images/ListOfBorrowedBooks.jpg');
+    background-repeat: no-repeat;
+    
+    height: 50px; /* Height of new image */
+    
+    
+    
+}
+.search-container .button1{
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top:15%;
+  right: 5.5%;
+}
+
+ .search-container button:hover {
+  background: #ccc;
+}
