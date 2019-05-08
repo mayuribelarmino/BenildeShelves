@@ -5,7 +5,8 @@ import '../css/BookInput.css';
 import { postBook } from '../util/service-helper';
 import PropTypes from 'prop-types';
 import { postLend } from '../util/service-helper';
-import '../Components/AddDate';
+import {NavLink} from "react-router-dom";
+
 
 
 
@@ -60,6 +61,7 @@ handleSubmit = e =>{
   console.log(this.state.lend);
 postLend(this.state.lend)
 
+
 .then((response) => {
     console.log("postLend then");
     //console.log(response);
@@ -69,7 +71,7 @@ postLend(this.state.lend)
       console.log("editbook");
      
      axios.put('http://localhost:8080/BenildeShelves/rest/books/edit/' + bookID).then((res) => {
-      
+     
       console.log(res);
        console.log(res.date);
      });
@@ -174,7 +176,7 @@ postLend(this.state.lend)
     </div>
     <div className="col-50">
     <fieldset >
-      <button type="button" class="btn btn-danger" >Cancel</button>
+      <button type="button" class="btn btn-danger" ><NavLink to="/ListOfBorrowedBooks" className="font1"> Cancel </NavLink></button>
     </fieldset>
     </div>
     </div>

@@ -31,3 +31,20 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.homepage {
+  border: 5px solid rgb(231, 222, 222);
+  background-image: url("/src/images/HomePage.png");
+  position: fixed;
+  right:0;
+}
+
+
+.col-10 {
+    width: 83.33%;
+    height:100%;
+}

@@ -8,6 +8,7 @@ import ListOfbooks from './listofbooks';
 
 
 
+
 class AddBook extends Component{
     constructor(props){
        
@@ -48,7 +49,8 @@ class AddBook extends Component{
     postBook(this.state.book)
     .then(function(response){
         console.log(response);
-        alert('You successully add new book')
+        alert('You successully add new book');
+        
         
        
     })

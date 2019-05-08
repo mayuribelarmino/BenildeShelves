@@ -131,6 +131,14 @@ label{
   line-height:1.5;
 }
 
+.font1{
+  color:#FFF;
+  
+}
+a:hover { 
+color:#FFF;
+}
+
 #contact button {
     cursor: pointer;
     width: 80%;

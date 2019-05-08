@@ -11,6 +11,7 @@ constructor(...args) {
 
   this.state = {
   lends:[],
+  borrowerName:'',
   
   editLendData: {
     lendID:'',
@@ -24,6 +25,8 @@ constructor(...args) {
   },
   editLendModal: false
 };
+this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleChangeborrowerName = this.handleChangeborrowerName.bind(this);
 }
 componentWillMount() {
   this._refreshLends();
@@ -77,10 +80,40 @@ componentDidMount(){
    console.log(res);
     this.setState({lends:res.data});
 }) }  
+
+handleSubmit(){
+    
+  if(this.state.borrowerName !=""){
+    let getLendURL ='http://localhost:8080/BenildeShelves/rest/lend?borrowerName=' + this.state.borrowerName;
+    console.log(getLendURL);
+    axios.get(getLendURL).then(res =>
+      {
+        this.setState({lends:[]});
+        //var BlankArray = this.state.books;
+        //this.state.books.push(res.data)
+        this.setState({lends:res.data})
+        
+        console.log(res);
+        console.log(res.data)
+      });
+    }
+
+  else {
+
+  }
+
+  
+  
+    
+  }
+  handleChangeborrowerName(event) {
+    this.setState({borrowerName: event.target.value});
+  }
   
   render() {
-
+  
     let lend=this.state.lends.map(lend =>{
+      if (lend.lendStatus == "Not Returned"){
       return(
         
           <tr>
@@ -90,14 +123,54 @@ componentDidMount(){
         <td>{lend.dateBorrowed}</td>
         <td>{lend.dateDue}</td>
         <td>{lend.lendStatus}</td>
-        <td><Button color="success" size="sm" className="mr-2" onClick={this.editLend.bind(this,lend.lendID, lend.bookID, lend.borrowerName, lend.dateBorrowed, lend.dateDue,lend.dateReturned,lend.lendStatus)}>RETURN BOOK</Button>
-      </td>
+        
+        <td>
+          
+       <Button color="success" size="sm" className="mr-2" onClick={this.editLend.bind(this,lend.lendID, lend.bookID, lend.borrowerName, lend.dateBorrowed, lend.dateDue,lend.dateReturned,lend.lendStatus)}>RETURN BOOK</Button>
+       
+       
+        </td>
+        
+      
         </tr>
         
       )
+      }
+      else if (lend.lendStatus =="Returned"){
+      
+        return(
+        
+          <tr>
+        <td key={lend.lendID}>{lend.lendID}</td>
+        <td>{lend.title}</td>
+        <td>{lend.borrowerName}</td>
+        <td>{lend.dateBorrowed}</td>
+        <td>{lend.dateDue}</td>
+        <td>{lend.lendStatus}</td>
+        
+        <td>
+          
+       
+       
+        </td>
+        
+      
+        </tr>
+        
+      )
+      
+
+      }
     })
         return (
             <div>
+                <div class="search-container">
+                
+             <input type="text" className="borrowerName" name="borrowerName" onKeyUp={this.handleSubmit}onChange={this.handleChangeborrowerName} placeholder="Search for Borrower Name"/>
+
+                
+              
+             </div>
                 	
                     <table class="my_table">
   <tr>

@@ -1,6 +1,6 @@
 import React, {Component,Fragment} from 'react';
 
-
+import {NavLink} from "react-router-dom";
 import '../css/BookInput.css';
 
 import PropTypes from 'prop-types';
@@ -87,7 +87,7 @@ import PropTypes from 'prop-types';
     </div>
     <div className="col-50">
     <fieldset >
-      <button type="button" class="btn btn-danger" >Cancel</button>
+      <button type="button" class="btn btn-danger" ><NavLink to="/ListOfBorrowedBooks" className="font1">Cancel</NavLink></button>
     </fieldset>
     </div>
     </div>

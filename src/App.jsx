@@ -9,13 +9,17 @@ import AddBorrower from './Components/AddBorrower';
 
 import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
+import './Components/AddDate.js';
+import Homepage from './Components/Homepage';
 
 
 const NewRoute = () =>{
   return(
     <div>
       <Header/>
+      
       <Menu/>
+      <Homepage/>
     </div>
   )
 }
@@ -58,6 +62,7 @@ class App extends Component {
     return (
      <BrowserRouter>
      <div>
+
      <Route path="" component={NewRoute} />
      <Route path="/ListOfBooks" component={NewRoute1} />
      <Route path="/AddBook" component={NewRoute2} />

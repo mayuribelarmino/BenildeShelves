@@ -113,7 +113,7 @@ class Table extends Component{
   }
   else if (this.state.Subject !=""){
 
-    let getBookURL ='http://localhost:8080/BenildeShelves/rest/books?Author='+this.state.Subject;
+    let getBookURL ='http://localhost:8080/BenildeShelves/rest/books?Subject='+this.state.Subject;
     console.log(getBookURL);
     axios.get(getBookURL).then(res =>
       {
@@ -129,7 +129,7 @@ class Table extends Component{
   }
   else if (this.state.ISBN !=""){
 
-    let getBookURL ='http://localhost:8080/BenildeShelves/rest/books?Author=' + this.state.ISBN;
+    let getBookURL ='http://localhost:8080/BenildeShelves/rest/books?ISBN=' + this.state.ISBN;
     console.log(getBookURL);
     axios.get(getBookURL).then(res =>
       {
@@ -143,6 +143,7 @@ class Table extends Component{
       });
 
   }
+ 
   
 
   
@@ -191,7 +192,7 @@ componentDidMount(){
         <td>{book.status}</td>
         <td>{book.datePublished}</td>
         <td>{book.dateAcquired}</td>
-        <td><Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Edit</Button>
+        <td><Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Edit Book </Button>
        </td>
         </tr>
       )
@@ -206,12 +207,13 @@ componentDidMount(){
                 <input type="text"  className="title" name="Title" onKeyUp={this.handleSubmit}onChange={this.handleChangeTitle} placeholder="Search for book title"/>
                 <input type="text" className="author" name="Author" onKeyUp={this.handleSubmit}onChange={this.handleChangeAuthor} placeholder="Search for book author"/>
                 <input type="text" className="subject" name="Subject" onKeyUp={this.handleSubmit}onChange={this.handleChangeSubject} placeholder="Search for subject"/>
-                <input type="text" className="isbn" name="ISBN" onKeyUo={this.handleSubmit}onChange={this.handleChangeISBN} placeholder="Search for book ISBN"/>
+                <input type="text" className="isbn" name="ISBN" onKeyUp={this.handleSubmit}onChange={this.handleChangeISBN} placeholder="Search for book ISBN"/>
 
                 
               
              </div>
     <table class="my_table table1">
+    
   <tr>
     <th>BOOK ID</th>
     <th>TITLE</th>

@@ -29,3 +29,10 @@ table {
   tr:hover {
     background: #d1d1d1;
   }
+
+  .borrowerName{
+    position: absolute;
+    right: 5.5%;
+    top:15%;
+  
+  }
