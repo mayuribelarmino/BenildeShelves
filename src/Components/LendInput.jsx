@@ -16,6 +16,7 @@ import {NavLink} from "react-router-dom";
     super(props);
 
     this.state = {
+      
     books:[],
     bookID:'',
     
@@ -79,6 +80,7 @@ postLend(this.state.lend)
     };
     editBookDetails();
     alert('You successully input Borrowed details');
+    window.location.reload();
     
    
 })
@@ -159,7 +161,7 @@ postLend(this.state.lend)
       </div>
       <div class="col-75">
     <fieldset>
-      <input placeholder="Enter date published" type="date" tabindex="2" id="dateBorrowed" name="dateBorrowed" onChange={this.handleChange} required/>
+      <input placeholder="Enter date published" type="date" tabindex="2" id="dateBorrowed" name="dateBorrowed"  onChange={this.handleChange} required/>
       <input type="hidden" id="dateDue" name="dateDue" onChange={this.handleChange} />
     </fieldset>
     </div>

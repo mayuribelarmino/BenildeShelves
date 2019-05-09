@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import '../css/Table.css'
 import axios from 'axios';
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
-import { Input,FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Input,FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Button, Table } from 'reactstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import PropTypes from 'prop-types';
 
-class Table extends Component{
+class Table1 extends Component{
  
   constructor(props) {
     super(props);
 
     this.state = {
+      lends:[],
     books:[],
     Title:'',
     Author:'',
@@ -32,9 +33,23 @@ class Table extends Component{
       datePublished:'',
       dateAcquired:''
     },
+    editBookData1: {
+      bookID:'',
+      title:'',
+      author:'',
+      isbn:'',
+      subject:'',
+      status:'',
+      datePublished:'',
+      dateAcquired:''
+  
+    },
+
+   
     
 
-    editBookModal: false
+    editBookModal: false,
+    editBookModal1: false
   };
   this.handleSubmit = this.handleSubmit.bind(this);
   this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -51,6 +66,28 @@ class Table extends Component{
       editBookModal: ! this.state.editBookModal
     });
   }
+  toggleEditBookModal1() {
+
+    
+    this.setState({
+      editBookModal1: ! this.state.editBookModal1
+    });
+  
+   
+  }
+
+  toggleEditBookModal11() {
+
+    this._refreshBooks();
+
+      this.setState({
+        editBookModal1: false, editBookData1: { bookID: '', title: '', author: '',isbn: '', subject: '', status: '',datePublished: '', dateAcquired: '' }
+      })
+    ;
+  
+   
+  }
+ 
 
   updateBook() {
     let { bookID, title, author,isbn,subject,status,datePublished,dateAcquired } = this.state.editBookData;
@@ -70,6 +107,27 @@ class Table extends Component{
       editBookData: { bookID, title, author,isbn,subject,status,datePublished,dateAcquired}, editBookModal: ! this.state.editBookModal
     });
   }
+
+  editBook1( bookID, title, author,isbn,subject,status,datePublished,dateAcquired) {
+    
+    this.setState({
+      editBookData1: { bookID, title, author,isbn,subject,status,datePublished,dateAcquired}, editBookModal1: ! this.state.editBookModal1
+    });
+
+    console.log(this.state.editBookData1.bookID)
+    let editBookDetails = () => {
+      axios.get('http://localhost:8080/BenildeShelves/rest/lend?bookID=' + bookID).then(res =>{
+    console.log(this.state.editBookData1.bookID)
+ console.log(res);
+ console.log("didmount");
+  this.setState({lends:res.data});});
+    
+    };
+    editBookDetails();
+  
+  }
+
+ 
   _refreshBooks() {
     axios.get('http://localhost:8080/BenildeShelves/rest/books?status=Available').then((response) => {
       this.setState({
@@ -178,8 +236,28 @@ componentDidMount(){
     this.setState({books:res.data});
 }) }  
   
+
   render() {
 
+    let lend=this.state.lends.map(lend =>{
+      
+      return(
+        
+          <tr>
+        <td key={lend.lendID}>{lend.lendID}</td>
+        <td>{lend.title}</td>
+        <td>{lend.borrowerName}</td>
+        <td>{lend.dateBorrowed}</td>
+        <td>{lend.dateReturned}</td>
+      
+        
+      
+        
+      
+        </tr>
+        
+      )
+    });
   
     let books1 = this.state.books.map((book) => {
       return (
@@ -192,8 +270,17 @@ componentDidMount(){
         <td>{book.status}</td>
         <td>{book.datePublished}</td>
         <td>{book.dateAcquired}</td>
-        <td><Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Edit Book </Button>
+       
+          
+          
+          <td> 
+        <Button color="success" size="sm" className="mr-2" onClick={this.editBook1.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Book Transaction </Button>
        </td>
+
+       <td>
+          
+          <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Edit Book </Button>
+          </td>
         </tr>
       )
     });
@@ -223,7 +310,10 @@ componentDidMount(){
     <th>STATUS</th>
     <th>DATE PUBLISHED</th>
     <th>DATE ACQUIRED</th>
+    <th>HISTORY</th>
     <th>ACTION</th>
+
+    
   </tr>
   
     {books1}
@@ -348,6 +438,74 @@ componentDidMount(){
         </ModalFooter>
       </Modal>
 
+      <Modal isOpen={this.state.editBookModal1} toggle={this.toggleEditBookModal1.bind(this)}>
+        <ModalHeader toggle={this.toggleEditBookModal1.bind(this)}>Edit Book Details</ModalHeader>
+        <div class="modal-body">
+          <FormGroup>
+            
+            <InputGroup size="sm" className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-sm">Title</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="title" value={this.state.editBookData1.title} onChange={(e) => {
+                        let { editBookData1 } = this.state;
+
+                        editBookData1.title = e.target.value;
+
+                        this.setState({ editBookData1 });
+                      }} readonly/>
+            </InputGroup>
+           
+          </FormGroup>
+          <FormGroup>
+            
+            <InputGroup size="sm" className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-sm">ID</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="ID" value={this.state.editBookData1.bookID} onChange={(e) => {
+                        let { editBookData1 } = this.state;
+
+                        editBookData1.bookID = e.target.value;
+
+                        this.setState({ editBookData1 });
+                      }} readonly/>
+            </InputGroup>
+           
+          </FormGroup>
+          
+       
+        <FormGroup>
+          <InputGroup size="sm" className="mb-3">
+          
+          <table striped bordered hover size="sm" className="mb-3" className="table2">
+  <tr>
+    <th>LendID</th>
+    <th>Book Name</th>
+    <th>Borrower Name</th>
+    <th>Date Borrowed</th>
+    <th>Date Returned</th>
+   
+  </tr>
+  
+    {lend}
+   
+  
+  
+</table>
+</InputGroup>
+
+</FormGroup>
+
+      </div>
+        <ModalFooter>
+        
+          <Button color="secondary" onClick={this.toggleEditBookModal11.bind(this)}>Back to List</Button>
+        </ModalFooter>
+      </Modal>
+
+
+     
 
 		</div>
 
@@ -360,4 +518,4 @@ componentDidMount(){
 }
 
 
-export default Table;
+export default Table1;

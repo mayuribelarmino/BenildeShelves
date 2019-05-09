@@ -172,7 +172,7 @@ handleSubmit(){
               
              </div>
                 	
-                    <table class="my_table">
+                    <table class=" table1 my_table">
   <tr>
     <th>LendID</th>
     <th>Book Name</th>

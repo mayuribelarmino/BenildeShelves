@@ -50,7 +50,7 @@ class AddBook extends Component{
     .then(function(response){
         console.log(response);
         alert('You successully add new book');
-        
+        window.location.reload();
         
        
     })

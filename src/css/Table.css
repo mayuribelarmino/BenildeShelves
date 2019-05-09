@@ -1,11 +1,27 @@
 .table1 {
     position: absolute;
+    left: 2.5%;
+    top:30%;
+    border-radius:10;
+    border: 5px solid rgb(90, 187, 114);
+    border-collapse: collapse;
+    width:97%;
+    table-layout: fixed;
+  }
+   th {
+    background: #ccc;
+    font-size:15px;
+    
+  }
+
+  .table2 {
+
     left: 5.5%;
     top:30%;
     border-radius:10;
     border: 5px solid rgb(90, 187, 114);
     border-collapse: collapse;
-    width:90%;
+    width:100%;
     table-layout: fixed;
   }
    th {
@@ -20,6 +36,12 @@
     padding-left:10px;
     padding-right:10px;
     font-size:14px;
+    
+  }
+  .td1{
+
+    white-space: nowrap
+    
   }
   
   tr:nth-child(even) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/ListOfBooks.css';
-import Table from './Table';
+import Table1 from './Table1';
 import BookList from './BookList'
 import axios from 'axios';
 
@@ -48,7 +48,7 @@ class ListOfBooks extends Component{
             <div className="image3">
             </div>
           
-            <Table
+            <Table1
              handleChange={this.handleChange}
              handleSubmit={this.handleSubmit}/>
             
