@@ -83,6 +83,7 @@ label{
 
 #contact input[type="text"],
 #contact input[type="email"],
+.date,
 
 #contact input[type="tel"],
 #contact input[type="url"],
@@ -102,6 +103,7 @@ label{
 #contact input[type="date"]:hover,
 #contact input[type="tel"]:hover,
 #contact input[type="url"]:hover,
+.date,
 #contact select,
 #contact textarea:hover {
   -webkit-transition: border-color 0.3s ease-in-out;

@@ -32,7 +32,7 @@ const Menu = () =>{
         <a><NavLink to="/ListOfBorrowedBooks"> List of Borrowed Books </NavLink></a>
         </li>
         <li>
-        <a><NavLink to="/AddBorrower"> Add a Borrower </NavLink></a>
+        <a><NavLink to="/AddBorrower"> Lend a Book </NavLink></a>
         </li>
        
     </ul>

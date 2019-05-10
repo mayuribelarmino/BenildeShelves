@@ -108,6 +108,19 @@ class Table1 extends Component{
     });
   }
 
+  editBookA( bookID, title, author,isbn,subject,status,datePublished,dateAcquired) {
+    this.setState({
+      editBookData: { bookID, title, author,isbn,subject,status,datePublished,dateAcquired}
+    });
+
+    if(status=="Available"){
+      alert("Click 'Lend a Book' to borrow this book");
+    }
+    else if (status=="Not Available"){
+     alert("Sorry! You cannot borrow this Book");
+    }
+  }
+
   editBook1( bookID, title, author,isbn,subject,status,datePublished,dateAcquired) {
     
     this.setState({
@@ -202,6 +215,23 @@ class Table1 extends Component{
 
   }
  
+  else if (this.state.Title =="" && this.state.Author=="" && this.state.Subject =="" && this.state.ISBN ==""){
+
+    let getBookURL ='http://localhost:8080/BenildeShelves/rest/books';
+    console.log(getBookURL);
+    axios.get(getBookURL).then(res =>
+      {
+        this.setState({books:[]});
+        //var BlankArray = this.state.books;
+        //this.state.books.push(res.data)
+        this.setState({books:res.data})
+        
+        console.log(res);
+        console.log(res.data)
+     
+      });
+
+  }
   
 
   
@@ -279,7 +309,11 @@ componentDidMount(){
 
        <td>
           
-          <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}>Edit Book </Button>
+         
+          <Button color="success" size="sm" className="fa fa-pencil" onClick={this.editBook.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}></Button>
+          
+          <Button color="success" size="sm" className="fa fa-book" onClick={this.editBookA.bind(this, book.bookID, book.title, book.author,book.isbn,book.subject,book.status,book.datePublished,book.dateAcquired)}> </Button>
+        
           </td>
         </tr>
       )

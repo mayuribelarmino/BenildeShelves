@@ -19,7 +19,7 @@ constructor(...args) {
     borrowerName:'',
     dateBorrowed:'',
     dateDue:'',
-    dateReturned:'',
+    dateReturned:new Date(),
     lendStatus:'Returned',
     
   },
@@ -36,6 +36,8 @@ toggleEditLendModal() {
   this.setState({
     editLendModal: ! this.state.editLendModal
   });
+
+ 
 }
 
 updateLend() {
@@ -62,10 +64,18 @@ updateLend() {
     })
   });
 }
-editLend( lendID, bookID, borrowerName, dateBorrowed,dateDue,dateReturned,lendStatus) {
+editLend( lendID, bookID, borrowerName, dateBorrowed,dateDue,lendStatus) {
   this.setState({
-    editLendData: { lendID,bookID, borrowerName, dateBorrowed,dateDue,dateReturned,lendStatus}, editLendModal: ! this.state.editLendModal
+    editLendData: { lendID,bookID, borrowerName, dateBorrowed,dateDue,lendStatus}, editLendModal: ! this.state.editLendModal
   });
+
+   // ETC METHODS
+let tick=() =>{
+  this.setState({
+    editLendData:{lendID,bookID, borrowerName, dateBorrowed,dateReturned: new Date(),dateDue,lendStatus}, editLendModal: !this.state.editLendModal
+  });
+}
+tick();
 }
 _refreshLends() {
   axios.get('http://localhost:8080/BenildeShelves/rest/lend?lendStatus=Not Returned').then((response) => {
@@ -74,6 +84,9 @@ _refreshLends() {
     })
   });
 }
+
+
+
 
 componentDidMount(){
     axios.get('http://localhost:8080/BenildeShelves/rest/lend?lendStatus=Not Returned').then(res =>{
@@ -98,8 +111,20 @@ handleSubmit(){
       });
     }
 
-  else {
+  else if (this.state.borrowerName ==""){
 
+    let getLendURL ='http://localhost:8080/BenildeShelves/rest/lend';
+    console.log(getLendURL);
+    axios.get(getLendURL).then(res =>
+      {
+        this.setState({lends:[]});
+        //var BlankArray = this.state.books;
+        //this.state.books.push(res.data)
+        this.setState({lends:res.data})
+        
+        console.log(res);
+        console.log(res.data)
+      });
   }
 
   
@@ -126,7 +151,7 @@ handleSubmit(){
         
         <td>
           
-       <Button color="success" size="sm" className="mr-2" onClick={this.editLend.bind(this,lend.lendID, lend.bookID, lend.borrowerName, lend.dateBorrowed, lend.dateDue,lend.dateReturned,lend.lendStatus)}>RETURN BOOK</Button>
+       <Button color="success" size="sm" className="mr-2" onClick={this.editLend.bind(this,lend.lendID, lend.bookID, lend.borrowerName, lend.dateBorrowed, lend.dateDue,lend.lendStatus)}>RETURN BOOK</Button>
        
        
         </td>
@@ -161,6 +186,7 @@ handleSubmit(){
       
 
       }
+
     })
         return (
             <div>
@@ -260,13 +286,13 @@ handleSubmit(){
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroup-sizing-sm">Date Returned</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl aria-label="Small" type="date" aria-describedby="inputGroup-sizing-sm" name="dateReturned" value={this.state.editLendData.dateReturned} onChange={(e) => {
+              <FormControl aria-label="Small" className="date" aria-describedby="inputGroup-sizing-sm" name="dateReturned" value={this.state.editLendData.dateReturned} onChange={(e) => {
                         let { editLendData } = this.state;
 
                         editLendData.dateReturned = e.target.value;
 
                         this.setState({ editLendData });
-                      }} />
+                      }} readOnly/>
             </InputGroup>
           </FormGroup>
           <FormGroup>

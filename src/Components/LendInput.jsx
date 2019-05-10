@@ -24,7 +24,7 @@ import {NavLink} from "react-router-dom";
       lendID:'',
       bookID:'',
       borrowerName:'',
-      dateBorrowed:'',
+      dateBorrowed:new Date(),
       dateDue:'2019-10-10',
       dateReturned:'',
       lendStatus:'Not Returned',
@@ -39,6 +39,13 @@ import {NavLink} from "react-router-dom";
   this.handleSubmit = this.handleSubmit.bind(this);
   this.handleChange = this.handleChange.bind(this);
   
+}
+
+// ETC METHODS
+tick() {
+  this.setState({
+    dateBorrowed: new Date()
+  });
 }
   handleChange = e => {
     const {name, value} = e.target;
@@ -161,7 +168,7 @@ postLend(this.state.lend)
       </div>
       <div class="col-75">
     <fieldset>
-      <input placeholder="Enter date published" type="date" tabindex="2" id="dateBorrowed" name="dateBorrowed"  onChange={this.handleChange} required/>
+      <input placeholder="Enter date returned" className="date" tabindex="2" id="dateBorrowed" name="dateBorrowed"  value={this.state.lend.dateBorrowed} readonly/>
       <input type="hidden" id="dateDue" name="dateDue" onChange={this.handleChange} />
     </fieldset>
     </div>
@@ -172,7 +179,7 @@ postLend(this.state.lend)
    <div className="row">
    <div className="col-50">
     <fieldset >
-      <button  type="submit" id="contact-submit" onClick={this.handleSubmit}>Add this Book</button>
+      <button  type="submit" id="contact-submit" onClick={this.handleSubmit}>Lend this Book</button>
       
     </fieldset>
     </div>
